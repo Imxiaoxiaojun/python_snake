@@ -12,7 +12,7 @@ class Board(object):
 
     def __init__(self):
         pygame.display.set_caption('snake')
-        back_image = Utils.load_image('bg.png')
+        back_image = Utils.load_image('bg.png').convert()
         self.screen.blit(back_image, (0, 0))
         pygame.display.flip()
 
