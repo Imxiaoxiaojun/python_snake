@@ -5,9 +5,9 @@ from random import *
 class Food(object):
 
     def __init__(self):
-        x = randint(4, 15) * 20
-        y = randint(4, 15) * 20
-        self.food_position = [x, y]
+        # x = randint(4, 15) * 20
+        # y = randint(4, 15) * 20
+        self.food_position = [60, 20]
 
     def food_list(self):
         return self.food_position

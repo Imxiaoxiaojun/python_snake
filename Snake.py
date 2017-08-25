@@ -6,7 +6,7 @@ import pygame
 class Snake(object):
 
     def __init__(self):
-        self.pos_list = [[20, 16]]
+        self.pos_list = [[20, 20]]
         self.direction = 'R'
 
     def set_list(self):

@@ -22,6 +22,7 @@ class Game(object):
 
     def run(self):
         while True:
+            frame_rate = pygame.time.Clock().tick(20)
             self.board = Board()
             # 检测例如按键等pygame事件
             for event in pygame.event.get():
@@ -38,22 +39,24 @@ class Game(object):
                         self.direction_flag = 'D'
 
             food_position = copy.deepcopy(self.food.food_list())
-            food_position[0] += 20
-            food_position[1] += 20
+            # food_position[0] += 20
+            # food_position[1] += 20
             food_image = Utils.load_image('food.png').convert()
             self.board.screen.blit(food_image, (food_position[0], food_position[1]))
 
             snake_position = self.snake.pos_list
             for pos in snake_position:
-                snake_image = Utils.load_image('snake_head.png').convert()
-                self.board.screen.blit(snake_image, (pos[0], pos[1]))
+                snake_head = Utils.load_image('snake_head.png').convert()
+                self.board.screen.blit(snake_head, (pos[0], pos[1]))
+                if len(snake_position) > 1:
+                    snake_image = Utils.load_image('snake_head.png').convert()
+                    self.board.screen.blit(snake_image, (pos[0], pos[1]))
+
+
                 # pygame.draw.rect(self.self.board.screen, (255, 0, 0), temp_rect)
             pygame.display.update()
-            frame_rate = pygame.time.Clock().tick(20)
             snake_head = snake_position[0]
-            if snake_head == food_position:
-                self.snake.eat_food(food_position)
-                self.food.update_food()
+
             if self.direction_flag == 'R':
                 if snake_head[0] < 560:
                     self.snake.change_direction(self.direction_flag)
@@ -78,6 +81,10 @@ class Game(object):
                     self.snake.move_direction()
                 else:
                     self.direction_flag = 'R'
+
+            if snake_head == food_position:
+                self.snake.eat_food(food_position)
+                self.food.update_food()
             # if x < 5:
             #     x += 1
             # else:
